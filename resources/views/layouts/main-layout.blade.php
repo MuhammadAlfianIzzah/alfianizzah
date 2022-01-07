@@ -19,7 +19,7 @@
         integrity="sha512-Woz+DqWYJ51bpVk5Fv0yES/edIMXjj3Ynda+KWTIkGoynAMHrqTcDUQltbipuiaD5ymEo9520lyoVOo9jCQOCA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     @stack("css")
-    <title>Pasarakyat Profile</title>
+    <title>{{ config('app.name') }} ~ {{ $title ?? '' }}</title>
 </head>
 
 <body>
