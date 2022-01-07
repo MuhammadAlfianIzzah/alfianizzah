@@ -2,8 +2,7 @@
     <div class="p-3 mb-4 bg-light rounded-3 shadow-sm">
         <div class="container">
             <h2 class="display-5 fw-bold">BLOGS</h2>
-            <p class="col-md-12 fs-5">Inilah langkah kami, sebagai bentuk kontribusi dalam upaya mensejahterakan pasar
-                tradisional di indonesia</p>
+            <p class="col-md-12 fs-5">Sedikit artikel dari saya ...</p>
         </div>
     </div>
     <div class="container">

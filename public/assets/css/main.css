@@ -153,6 +153,13 @@ nav img {
      object-position: left;
 }
 
+@media (max-width: 767.98px) {
+  .section-keuntungan .keuntungan-item-container .card img {
+    -o-object-position: center;
+       object-position: center;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .section-keuntungan .keuntungan-item-container .card .card-body {
     height: 100%;

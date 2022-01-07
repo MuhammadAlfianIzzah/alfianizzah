@@ -3,9 +3,11 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PatnerController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TestiController;
 use App\Models\Patners;
 use App\Models\Post;
+use App\Models\Project;
 use App\Models\Testimoni;
 use Illuminate\Support\Facades\Route;
 
@@ -24,8 +26,9 @@ Route::get('/', function () {
     $testimoni = Testimoni::get();
     $latest = Post::limit(1)->latest()->first();
     $posts = Post::limit(3)->get();
+    $project = Project::get();
     $patners = Patners::get();
-    return view('page.home', compact("testimoni", "posts", "latest", "patners"));
+    return view('page.home', compact("testimoni", "posts", "latest", "patners", "project"));
 })->name("home");
 
 Route::middleware(['auth', "verified"])->group(function () {
@@ -41,6 +44,10 @@ Route::middleware(['auth', "verified"])->group(function () {
     Route::put("/blogs/manage/edit/{posts:slug}", [BlogController::class, "update"])->name("edit-blog");
     Route::delete("/blogs/manage/delete/{posts:slug}", [BlogController::class, "delete"])->name("delete-blog");
     Route::post("/blogs/manage/create", [BlogController::class, "store"])->name("create-blog");
+    Route::get("/project/manage/myproject", [ProjectController::class, "show"])->name("myproject");
+    Route::post("/project/manage/myproject", [ProjectController::class, "store"])->name("myproject");
+    Route::delete("/project/manage/{project:nama}", [ProjectController::class, "destroy"])->name("delete-project");
+
 
     Route::get("/dashboard", [DashboardController::class, "show"])->name("dashboard");
 });
@@ -50,13 +57,15 @@ Route::middleware(['auth', "verified"])->group(function () {
 Route::get("/blogs", [BlogController::class, "show"])->name("show-blog");
 Route::get("/blogs/{posts:slug}", [BlogController::class, "detail"])->name("detail-blog");
 
-Route::get("/visi-misi", function () {
-    return view("page.visi-misi");
-})->name("visi-misi");
-Route::get("/program-kami", function () {
-    return view("page.program-kami");
-})->name("program-kami");
-
+// Route::get("/visi-misi", function () {
+//     return view("page.visi-misi");
+// })->name("visi-misi");
+// Route::get("/program-kami", function () {
+//     return view("page.program-kami");
+// })->name("program-kami");
+Route::get("/my-experience", function () {
+    return view("page.my-experience");
+})->name("my-experience");
 
 // Route::get('/dashboard', [DashboardController::class, "show"])->middleware(['auth'])->name('dashboard');
 

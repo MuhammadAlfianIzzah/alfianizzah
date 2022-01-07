@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use Intervention\Image\Facades\Image;
-
-
-use App\Models\Patners;
-use App\Models\Testimoni;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class PatnerController extends Controller
+class ProjectController extends Controller
 {
     public function show()
     {
-        $patners = Patners::get();
-        return view("page.patners.show", compact("patners"));
+        $project = Project::get();
+        return view("page.project.show", compact("project"));
     }
     public function store(Request $request)
     {
         $attr = $request->validate([
-            "nama" => "required|min:3",
-            "deskripsi" => "required",
-            "picture" => "required|mimes:png,jpg,jpeg"
+            "nama" => "required",
+            "link" => "required",
+            "desc" => "required",
+            "picture" => "required|mimes:png,jpg,webp",
+            "teknologi" => "required"
         ]);
         $file_name = time() . "_" .   $request->file("picture")->getClientOriginalName();
         $photo =   Image::make($request->file("picture"))
@@ -32,23 +32,27 @@ class PatnerController extends Controller
                 $constraint->aspectRatio();
             })
             ->encode('png', 80);
-        Storage::disk('public')->put('patners/' . $file_name, $photo);
-        $attr["picture"] = "patners/" . $file_name;
+        Storage::disk('public')->put('project/' . $file_name, $photo);
+        $attr["picture"] = "project/" . $file_name;
+        // $attr["picture"] = $request->file("picture")->store("/project/picture");
+        $attr["slug"] = Str::slug($attr["nama"], '-');;
+
         try {
-            Patners::create($attr);
+            Project::create($attr);
             return back()->with("success", "Berhasil Menambahkan");
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Throwable $th) {
             return back()->with("error", "Gagal Menambahkan");
         }
     }
-    public function destroy(Request $request, Patners $patners)
+    public function destroy(Request $request, Project $project)
     {
-        if (Storage::exists($patners->picture)) {
-            Storage::delete($patners->picture);
+
+        if (Storage::exists($project->picture)) {
+            Storage::delete($project->picture);
         }
 
         try {
-            $patners->delete();
+            $project->delete();
             return back()->with("success", "Berhasil Menghapus");
         } catch (\Throwable $th) {
             return back()->with("error", "Gagal Menghapus");
