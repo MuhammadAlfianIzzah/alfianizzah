@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{ asset('assets/img/logo.ico') }}">
-    <title>Pasarakyat Profile</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/sb-admin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
