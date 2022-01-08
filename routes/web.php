@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PatnerController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TestiController;
@@ -22,14 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $testimoni = Testimoni::get();
-    $latest = Post::limit(1)->latest()->first();
-    $posts = Post::limit(3)->get();
-    $project = Project::get();
-    $patners = Patners::get();
-    return view('page.home', compact("testimoni", "posts", "latest", "patners", "project"));
-})->name("home");
+Route::get('/', [HomeController::class, "show"])->name("home");
 
 Route::middleware(['auth', "verified"])->group(function () {
     Route::get("/setting/testimoni", [TestiController::class, "show"])->name("testimoni");
@@ -63,9 +57,7 @@ Route::get("/blogs/{posts:slug}", [BlogController::class, "detail"])->name("deta
 // Route::get("/program-kami", function () {
 //     return view("page.program-kami");
 // })->name("program-kami");
-Route::get("/my-experience", function () {
-    return view("page.my-experience");
-})->name("my-experience");
+Route::get("/my-experience", [HomeController::class, "experience"])->name("my-experience");
 
 // Route::get('/dashboard', [DashboardController::class, "show"])->middleware(['auth'])->name('dashboard');
 

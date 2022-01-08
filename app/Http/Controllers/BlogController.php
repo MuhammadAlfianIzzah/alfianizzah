@@ -13,10 +13,34 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\TwitterCard;
+use Artesaos\SEOTools\Facades\JsonLd;
+use Artesaos\SEOTools\Facades\SEOTools;
+
 class BlogController extends Controller
 {
     public function show()
     {
+        SEOMeta::setTitle(config("app.title") . "~ blog");
+        SEOMeta::setDescription(config("app.desc"));
+        SEOMeta::setCanonical(config("app.canonical"));
+
+        OpenGraph::setDescription(config("app.desc"));
+        OpenGraph::setTitle(config("app.title") . "~ blog");
+        OpenGraph::setUrl(config("app.canonical"));
+        OpenGraph::addProperty('type', 'Website portfolio');
+
+        TwitterCard::setTitle(config("app.title") . "~ blog");
+        TwitterCard::setSite('@alfianizzah');
+
+        JsonLd::setTitle(config("app.title") . "~ blog");
+        JsonLd::setDescription(config("app.desc"));
+        JsonLd::addImage("https://alfianizzahaja.my.id/assets/img/alfianizzah3.png");
+        OpenGraph::addProperty('locale', 'id-ID');
+
+        SEOMeta::addKeyword(['website alfianizzah', 'alfianizzah profile', 'alfianizzah website', "alfianizzah"]);
         $posts = Post::get();
         return view("page.blog.show", compact("posts"));
     }
