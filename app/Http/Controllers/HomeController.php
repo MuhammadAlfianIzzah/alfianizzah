@@ -23,11 +23,14 @@ class HomeController extends Controller
         SEOMeta::setTitle(config("app.title"));
         SEOMeta::setDescription(config("app.desc"));
         SEOMeta::setCanonical(config("app.canonical"));
+        SEOMeta::addKeyword(['website alfianizzah', 'alfianizzah profile', 'alfianizzah website', "alfianizzah"]);
 
         OpenGraph::setDescription(config("app.desc"));
         OpenGraph::setTitle(config("app.title"));
         OpenGraph::setUrl(config("app.canonical"));
         OpenGraph::addProperty('type', 'Website portfolio');
+        OpenGraph::addImage("https://alfianizzahaja.my.id/assets/img/alfianizzah3.png");
+        OpenGraph::addProperty('locale', 'id-ID');
 
         TwitterCard::setTitle(config("app.title"));
         TwitterCard::setSite('@alfianizzah');
@@ -35,9 +38,7 @@ class HomeController extends Controller
         JsonLd::setTitle(config("app.title"));
         JsonLd::setDescription(config("app.desc"));
         JsonLd::addImage("https://alfianizzahaja.my.id/assets/img/alfianizzah3.png");
-        OpenGraph::addProperty('locale', 'id-ID');
 
-        SEOMeta::addKeyword(['website alfianizzah', 'alfianizzah profile', 'alfianizzah website', "alfianizzah"]);
 
         // minified
         // SEOTools::setTitle(config("app.title"));
@@ -60,21 +61,26 @@ class HomeController extends Controller
         SEOMeta::setTitle(config("app.title"));
         SEOMeta::setDescription(config("app.desc"));
         SEOMeta::setCanonical(config("app.canonical"));
+        SEOMeta::addKeyword(['website alfianizzah', 'alfianizzah profile', 'alfianizzah website', "alfianizzah"]);
 
         OpenGraph::setDescription(config("app.desc"));
         OpenGraph::setTitle(config("app.title"));
         OpenGraph::setUrl(config("app.canonical"));
         OpenGraph::addProperty('type', 'Website portfolio');
+        OpenGraph::addImage("https://alfianizzahaja.my.id/assets/img/alfianizzah3.png");
+        OpenGraph::addProperty('locale', 'id-ID');
 
         TwitterCard::setTitle(config("app.title"));
         TwitterCard::setSite('@alfianizzah');
 
         JsonLd::setTitle(config("app.title"));
         JsonLd::setDescription(config("app.desc"));
-        JsonLd::addImage("https://alfianizzahaja.my.id/assets/img/alfianizzah3.png");
-        OpenGraph::addProperty('locale', 'id-ID');
+        JsonLd::setType('Website Porfolio');
 
-        SEOMeta::addKeyword(['website alfianizzah', 'alfianizzah profile', 'alfianizzah website', "alfianizzah"]);
+        JsonLd::addImage("https://alfianizzahaja.my.id/assets/img/alfianizzah3.png");
+
+
+
         return view("page.my-experience");
     }
 }
