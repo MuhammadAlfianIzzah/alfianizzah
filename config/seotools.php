@@ -16,7 +16,7 @@ return [
             'separator'    => ' - ',
             'keywords'     => ['website alfianizzah', 'alfianizzah profile', 'alfianizzah website', "alfianizzah"],
             'canonical'    => config("app.canonical"), // Set to null or 'full' to use Url::full(), set to 'current' to use Url::current(), set false to total remove
-            'robots'       => false, // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow
+            'robots'       => "nonindex", // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow
         ],
         /*
          * Webmaster tags are always added.

@@ -16,7 +16,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 
 class HomeController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
 
         // seo
